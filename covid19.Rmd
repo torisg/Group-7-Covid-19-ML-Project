@@ -41,4 +41,13 @@ TXdata <- covidData %>%
   filter(state == "TX")
 head(TXdata)
 ```
-
+## Group by State and Date
+```{r}
+covid.sorted <-covidData[order(covidData$state),]
+```    
+##  Compute differences
+```{r}
+covid.diff <-covid.sorted %>%
+    group_by(state) %>%
+    mutate(Diff = positive - lead(positive))
+```
